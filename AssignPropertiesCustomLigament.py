@@ -6,11 +6,12 @@ Created on Fri Dec 13 13:33:02 2019
 """
 
 # After scaling the model with class Ligament, we update it with the properties
-# from the CustomLigament, and rename it to run the desired analysis properly
+# from the CustomLigament, and rename it 
+
 import os
 from xml.dom.minidom import parse
 
-def change_properies(osimfile):
+def change_properies(osimfile,swingModel):
 
     TL = ['aACL_R','pACL_R','aPCL_R','pPCL_R','aMCL_R','iMCL_R','pMCL_R','dMCL_R',\
     'eMCL_R','aLCL_R','aACL_L','pACL_L','aPCL_L','pPCL_L','aMCL_L','iMCL_L',\
@@ -21,7 +22,7 @@ def change_properies(osimfile):
         if i==0:
             model_Lig = parse(osimfile) #load this model only the first time
         else:
-            model_Lig = parse(os.path.basename(osimfile).strip('.osim')+'_append.osim')
+            model_Lig = parse(osimfile.strip('.osim')+'_append.osim')
             
         Lig = model_Lig.getElementsByTagName('Ligament')[0]
         Lig_name = Lig.attributes['name'].value
@@ -33,7 +34,7 @@ def change_properies(osimfile):
         
         # Load the swing.osim model and the rest of the CustomLigament properties
         
-        model_swing = parse('swing_model.osim')
+        model_swing = parse(swingModel)
         CLig = model_swing.getElementsByTagName('CustomLigament')[i]
         CLig_name = Lig.attributes['name'].value
         if CLig_name != TL[i]:
@@ -58,7 +59,7 @@ def change_properies(osimfile):
             
         ## save the xml file
             
-        F= open(os.path.basename(osimfile).strip('.osim')+'_append.osim',"w")
+        F= open(osimfile.strip('.osim')+'_append.osim',"w")
         model_Lig.writexml(F)
         F.close()
         
