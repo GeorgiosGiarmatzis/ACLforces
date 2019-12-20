@@ -22,7 +22,7 @@ def change_properies(osimfile,swingModel):
         if i==0:
             model_Lig = parse(osimfile) #load this model only the first time
         else:
-            model_Lig = parse(osimfile.strip('.osim')+'_append.osim')
+            model_Lig = parse(osimfile.strip('Ligament.osim')+'CustomLigament.osim')
             
         Lig = model_Lig.getElementsByTagName('Ligament')[0]
         Lig_name = Lig.attributes['name'].value
@@ -58,11 +58,10 @@ def change_properies(osimfile,swingModel):
         Lig.tagName = 'CustomLigament'
             
         ## save the xml file
-            
-        F= open(osimfile.strip('.osim')+'_append.osim',"w")
+        model_app = osimfile.strip('Ligament.osim')+'CustomLigament.osim'    
+        F= open(model_app,"w")
         model_Lig.writexml(F)
         F.close()
         
-    model_app = os.path.basename(osimfile).strip('.osim')+'_append.osim'
-
+    
     return model_app

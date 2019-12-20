@@ -5,8 +5,8 @@
 # @author Dimitar Stanev (jimstanev@gmail.com)
 #
 # Tested with OpenSim 3.3
-from IPython import get_ipython
-get_ipython().magic('reset -sf')
+#from IPython import get_ipython
+#get_ipython().magic('reset -sf')
 import os
 from opensim_utils_g import perform_ik, perform_so, perform_jra, plot_sto
 import pandas as pd
@@ -16,16 +16,15 @@ import pandas as pd
 # parameters
 #path=askdirectory()
 #subject_dir = path
-def Opensim_Analysis(osimfilename): 
-    name = os.path.basename(osimfilename)
+def Opensim_Analysis(name,model_file): 
     for i in range(1,2):
-        events_file = pd.read_excel('HDR_'+str(i)+'\Ahelaos_HDR_'+str(i)+'_Events.xls')
-        trc_file = subject_dir + 'HopStudy\HopDistance\Right\HDR_'+str(i)+'\HDR_'+str(i)+'.trc'
-        grf_file = subject_dir + 'HopStudy\HopDistance\Right\HDR_'+str(i)+'\HDR_'+str(i)+'_GRF.mot'
-        grf_xml_file = subject_dir + 'HopStudy\HopDistance\Right\HDR_'+str(i)+'\HDR_'+str(i)+'_ExternalLoads.xml'
-        reserve_actuators_file = subject_dir + 'Settings_Ligaments/Actuators.xml'
-        results_dir = subject_dir + 'Results_Ligaments/'
-        settings_dir = subject_dir + 'Settings_Ligaments/'
+        events_file = pd.read_excel(name+'_HDR_'+str(i)+'_Events.xls')
+        trc_file = '\HDR_'+str(i)+'\HDR_'+str(i)+'.trc'
+        grf_file = '\HDR_'+str(i)+'_GRF.mot'
+        grf_xml_file = '\HDR_'+str(i)+'_ExternalLoads.xml'
+        reserve_actuators_file = 'Actuators.xml'
+        results_dir = 'Results'
+        settings_dir = 'Settings'
         opensimtools_dir = 'C:\Opensim3.3\\bin'
         opensimplugin_dir = 'C:\Opensim3.3\plugins'
         
