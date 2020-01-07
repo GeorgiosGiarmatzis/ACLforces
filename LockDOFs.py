@@ -11,10 +11,11 @@ import opensim
 #os.chdir('C:\Users\user\Documents\GitHub\ACLforces')
 #cwd = os.getcwd()
 
-def lock(model_app,coordinate,LockType):
+def lock(model_app,coordinate,LockType,ClampType):
     model = opensim.Model(model_app)
     dof = model.getCoordinateSet().get(coordinate)
     dof.setDefaultLocked(LockType)
+    dof.setDefaultClamped(ClampType)
 #    ml = model_app.strip('.osim')+ '_unlocked.osim'
     model.printToXML(model_app)
     

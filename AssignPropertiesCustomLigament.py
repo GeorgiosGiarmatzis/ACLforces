@@ -8,7 +8,6 @@ Created on Fri Dec 13 13:33:02 2019
 # After scaling the model with class Ligament, we update it with the properties
 # from the CustomLigament, and rename it 
 
-import os
 from xml.dom.minidom import parse
 
 def change_properies(osimfile,swingModel):
@@ -22,7 +21,7 @@ def change_properies(osimfile,swingModel):
         if i==0:
             model_Lig = parse(osimfile) #load this model only the first time
         else:
-            model_Lig = parse(osimfile.strip('Ligament.osim')+'CustomLigament.osim')
+            model_Lig = parse(osimfile.strip('.osim')+'CL.osim')
             
         Lig = model_Lig.getElementsByTagName('Ligament')[0]
         Lig_name = Lig.attributes['name'].value
@@ -57,8 +56,8 @@ def change_properies(osimfile,swingModel):
         
         Lig.tagName = 'CustomLigament'
             
-        ## save the xml file
-        model_app = osimfile.strip('Ligament.osim')+'CustomLigament.osim'    
+  ## save the xml file
+        model_app = osimfile.strip('.osim')+'CL.osim'   
         F= open(model_app,"w")
         model_Lig.writexml(F)
         F.close()
